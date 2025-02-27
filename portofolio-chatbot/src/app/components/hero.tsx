@@ -1,5 +1,5 @@
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -10,8 +10,9 @@ export default function Hero() {
           <span className="block text-primary">Your Name</span>
         </h1>
         <p className="text-xl text-muted-foreground max-w-2xl">
-          I'm a full-stack developer specializing in building exceptional digital experiences. Currently, I'm focused on
-          building accessible, human-centered products.
+          I'm Faisal Meah, a full-stack developer specializing in building
+          exceptional digital experiences. Currently, I'm focused on building
+          accessible, human-centered products.
         </p>
         <div className="flex gap-4">
           <Link
@@ -29,9 +30,14 @@ export default function Hero() {
         </div>
       </div>
       <div className="flex-shrink-0 relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary/20">
-        <Image src="/placeholder.svg?height=320&width=320" alt="Your Name" fill className="object-cover" priority />
+        <Image
+          src="/placeholder.svg?height=320&width=320"
+          alt="Your Name"
+          fill
+          className="object-cover"
+          priority
+        />
       </div>
     </section>
-  )
+  );
 }
-
