@@ -1,17 +1,74 @@
 "use client";
 
 import { MessageSquare } from "lucide-react";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useRef } from "react";
 import { useChat } from "ai/react";
 
 export default function ChatButton() {
   const [isOpen, setIsOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const { messages, input, handleInputChange, handleSubmit } = useChat();
+  const [isUploading, setIsUploading] = useState(false);
 
   const handleMessageSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleSubmit(e);
+  };
+
+  const [uploadStatus, setUploadStatus] = useState<{
+    message: string;
+    type: "info" | "success" | "error";
+  } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    // Check if it's a PDF
+    if (file.type !== "application/pdf") {
+      setUploadStatus({
+        message: "Please upload a PDF file",
+        type: "error",
+      });
+      return;
+    }
+    try {
+      setIsUploading(true);
+      setUploadStatus({
+        message: `Uploading ${file.name}...`,
+        type: "info",
+      });
+      const formData = new FormData();
+      formData.append("pdf", file);
+      const response = await fetch("/api/upload-pdf", {
+        method: "POST",
+        body: formData,
+      });
+      if (!response.ok) {
+        throw new Error("Upload failed");
+      }
+      const data = await response.json();
+      setUploadStatus({
+        message: `${file.name} uploaded successfully. You can now ask questions about this document.`,
+        type: "success",
+      });
+
+      // handleSystemMessage(`PDF "${file.name}" has been processed and is ready for questions.`);
+    } catch (error) {
+      setUploadStatus({
+        message: error instanceof Error ? error.message : "Upload failed",
+        type: "error",
+      });
+    } finally {
+      setIsUploading(false);
+      // Reset file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    }
+  };
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
   };
 
   return (
@@ -46,6 +103,19 @@ export default function ChatButton() {
                 <strong>{message.role}:</strong> {message.content}
               </div>
             ))}
+            {uploadStatus && (
+              <div
+                className={`mb-2 p-2 rounded ${
+                  uploadStatus.type === "success"
+                    ? "bg-green-100"
+                    : uploadStatus.type === "error"
+                    ? "bg-red-100"
+                    : "bg-blue-100"
+                }`}
+              >
+                {uploadStatus.message}
+              </div>
+            )}
           </div>
           <form
             onSubmit={handleMessageSubmit}
@@ -58,6 +128,22 @@ export default function ChatButton() {
               className="w-full p-2 border border-gray-300 rounded-lg"
               placeholder="Type a message..."
               // color="black"
+            />
+            <button
+              type="button"
+              onClick={handleUploadClick}
+              disabled={isUploading}
+              className="ml-2 p-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition"
+              title="Upload PDF"
+            >
+              {isUploading ? "..." : "📎"}
+            </button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="application/pdf"
+              onChange={handleFileUpload}
+              className="hidden"
             />
             <button type="submit" className="hidden">
               Send

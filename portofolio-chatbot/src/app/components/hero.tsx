@@ -7,10 +7,10 @@ export default function Hero() {
       <div className="flex-1 space-y-6">
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
           <span className="block">Hi, I'm</span>
-          <span className="block text-primary">Faisal Meah</span>
+          <span className="block text-primary">Emily Smith</span>
         </h1>
         <p className="text-xl text-muted-foreground max-w-2xl">
-          I'm Faisal Meah, a full-stack developer specializing in building
+          I'm Emily Smith, a full-stack developer specializing in building
           exceptional digital experiences. Currently, I'm focused on building
           accessible, human-centered products.
         </p>
