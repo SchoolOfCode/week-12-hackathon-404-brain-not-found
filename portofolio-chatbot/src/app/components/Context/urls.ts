@@ -24,7 +24,7 @@ export const urls = [
     loading: false,
   },
   {
-    url: "https://www.fergus-gildea.ie",
+    url: "https://fergus-g.github.io/test-pinecone/",
     title: "Fergie",
     seeded: false,
     loading: false,

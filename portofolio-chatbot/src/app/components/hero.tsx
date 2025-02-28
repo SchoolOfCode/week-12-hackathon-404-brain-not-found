@@ -7,7 +7,7 @@ export default function Hero() {
       <div className="flex-1 space-y-6">
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
           <span className="block">Hi, I'm</span>
-          <span className="block text-primary">Your Name</span>
+          <span className="block text-primary">Faisal Meah</span>
         </h1>
         <p className="text-xl text-muted-foreground max-w-2xl">
           I'm Faisal Meah, a full-stack developer specializing in building
@@ -31,7 +31,7 @@ export default function Hero() {
       </div>
       <div className="flex-shrink-0 relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary/20">
         <Image
-          src="/placeholder.svg?height=320&width=320"
+          src="/Image20250228092821.jpg"
           alt="Your Name"
           fill
           className="object-cover"

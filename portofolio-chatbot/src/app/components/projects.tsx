@@ -1,6 +1,6 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Github, ExternalLink } from "lucide-react"
+import Image from "next/image";
+import Link from "next/link";
+import { Github, ExternalLink } from "lucide-react";
 
 const projects = [
   {
@@ -8,8 +8,14 @@ const projects = [
     title: "E-commerce Platform",
     description:
       "A full-stack e-commerce platform with product listings, cart functionality, and secure checkout process.",
-    image: "/placeholder.svg?height=400&width=600",
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "PostgreSQL"],
+    image: "/images.png",
+    techStack: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Prisma",
+      "PostgreSQL",
+    ],
     githubUrl: "#",
     demoUrl: "#",
   },
@@ -18,7 +24,7 @@ const projects = [
     title: "Weather Dashboard",
     description:
       "Interactive weather dashboard that displays current and forecasted weather data with beautiful visualizations.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/Weather_dashboard_2x.png",
     techStack: ["React", "D3.js", "OpenWeather API", "CSS Modules"],
     githubUrl: "#",
     demoUrl: "#",
@@ -28,7 +34,7 @@ const projects = [
     title: "Task Management API",
     description:
       "RESTful API for task management with authentication, task CRUD operations, and team collaboration features.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/task-manager.png",
     techStack: ["Node.js", "Express", "MongoDB", "JWT", "Docker"],
     githubUrl: "#",
     demoUrl: "#",
@@ -36,13 +42,14 @@ const projects = [
   {
     id: 4,
     title: "Data Visualization Dashboard",
-    description: "Interactive dashboard displaying complex datasets with filterable charts and exportable reports.",
-    image: "/placeholder.svg?height=400&width=600",
+    description:
+      "Interactive dashboard displaying complex datasets with filterable charts and exportable reports.",
+    image: "/data-visual.jpg",
     techStack: ["React", "TypeScript", "Chart.js", "Material UI", "Firebase"],
     githubUrl: "#",
     demoUrl: "#",
   },
-]
+];
 
 export default function Projects() {
   return (
@@ -56,14 +63,24 @@ export default function Projects() {
               className="bg-card rounded-lg overflow-hidden shadow-md transition-transform hover:shadow-lg hover:-translate-y-1"
             >
               <div className="relative h-48 w-full">
-                <Image src={project.image || "/placeholder.svg"} alt={project.title} fill className="object-cover" />
+                <Image
+                  src={project.image || "/placeholder.svg"}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                <p className="text-muted-foreground mb-4">{project.description}</p>
+                <p className="text-muted-foreground mb-4">
+                  {project.description}
+                </p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.techStack.map((tech) => (
-                    <span key={tech} className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded-full">
+                    <span
+                      key={tech}
+                      className="px-2 py-1 bg-secondary text-secondary-foreground text-xs rounded-full"
+                    >
                       {tech}
                     </span>
                   ))}
@@ -90,6 +107,5 @@ export default function Projects() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-
